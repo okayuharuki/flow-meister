@@ -11,7 +11,7 @@ export default function About() {
           段落が入ります。段落が入ります。
           <br />段落が入ります。
         </p>
-        <ButtonSample />
+        <ButtonSample text="ボタン" type="submit" />
         <hr/>
         <CardSample />
       </div>
