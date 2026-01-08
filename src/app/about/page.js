@@ -1,5 +1,6 @@
 import ButtonSample from "../../components/ui/ButtonSample";
 import CardSample from "../../components/ui/CardSample";
+import MenuSample from "../../components/ui/MenuSample";
 
 export default function About() {
   const boxClass = "box";
@@ -14,6 +15,8 @@ export default function About() {
         <ButtonSample text="ボタン" type="submit" />
         <hr/>
         <CardSample />
+        <hr />
+        <MenuSample />
       </div>
       <div></div>
     </>
