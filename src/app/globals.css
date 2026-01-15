@@ -1,36 +1,67 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* color definition */
+  /* スラッシュ(/)ではなくハイフン(-)を使います */
+  --Slate-300: #cbd5e1;
+  --Slate-400: #94a3b8;
+  --Slate-700: #334155;
+  --Sky-50: #f0f9ff;
+  --Sky-100: #e0f2fe;
+  --Sky-200: #bae6fd;
+  --Sky-400: #38bdf8;
+  --Blue-500: #3b82f6;
+  --Gray-200: #e5e7eb;
+  --White: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* --- 初期化 & リセット --- */
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  padding: 0;
+}
+
+body {
   margin: 0;
+  padding: 0;
+  /* 呼び出し側もハイフンに合わせます */
+  background: var(--Sky-50);
+  font-family: var(--font-m-plus-1p), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.8;
+  color: var(--Slate-700);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
 }
