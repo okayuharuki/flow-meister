@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./HambargerIcon.module.css";
+import styles from "./HamburgerIcon.module.css";
 
 export default function HumburgerIcon({ isOpen = false }) {
   const handleClick = () => {
