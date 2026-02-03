@@ -2,9 +2,9 @@
 
 import styles from "./HamburgerIcon.module.css";
 
-export default function HumburgerIcon({ isOpen = false }) {
+export default function HumburgerIcon({ isOpen = false, onClick }) {
   const handleClick = () => {
-    alert("クリックされました");
+    onClick();
   };
 
   return (
