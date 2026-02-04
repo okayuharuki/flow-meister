@@ -1,6 +1,16 @@
 import styles from "./Heading.module.css";
 
-export default function Heading({ subText, mainText, textAlign = "isCenter" }) {
+type HeadingProps = {
+  subText: string;
+  mainText: string;
+  textAlign: "isLeft" | "isCenter" | "isRight";
+};
+
+export default function Heading({
+  subText,
+  mainText,
+  textAlign = "isCenter",
+}: HeadingProps) {
   return (
     <div className={`${styles.heading} ${styles[textAlign]}`}>
       <p className={styles.sub}>{subText}</p>
