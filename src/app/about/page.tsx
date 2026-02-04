@@ -17,7 +17,7 @@ export default function About() {
         <hr />
         <Heading subText="Feature" mainText="3つの特徴" textAlign="isRight"></Heading>
         <hr />
-        <HamburgerIcon isOpen={true} />
+        {/* <HamburgerIcon isOpen={true} /> */}
 
         <p style={{ color: "#333", backgroundColor: "pink" }}>
           段落が入ります。段落が入ります。
