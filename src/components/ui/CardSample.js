@@ -8,10 +8,13 @@ export default async function CardSample() {
     { id: 4, text: "もっと見る" },
   ];
 
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  const json = await response.json();
+  // const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  // const json = await response.json();
 
-  console.log(json?.description?.text || "空の説明文です。");
+  // 20260204_代わりにダミーデータを作ります
+  const json = { title: "テスト用のタイトル（通信なし）" };
+
+  // console.log(json?.description?.text || "空の説明文です。");
 
   return (
     <div className="card">

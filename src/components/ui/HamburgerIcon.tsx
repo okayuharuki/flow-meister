@@ -2,7 +2,15 @@
 
 import styles from "./HamburgerIcon.module.css";
 
-export default function HamburgerIcon({ isOpen = false, onClick }) {
+type HamburgerIconProps = {
+  isOpen: boolean;
+  onClick: () => void;
+};
+
+export default function HamburgerIcon({
+  isOpen = false,
+  onClick,
+}: HamburgerIconProps) {
   const handleClick = () => {
     onClick();
   };
