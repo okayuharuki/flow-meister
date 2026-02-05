@@ -1,6 +1,7 @@
 import { M_PLUS_1p, Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const mplus1p = M_PLUS_1p({
   weight: ["400", "500", "700", "800"],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
       <body className={`${mplus1p.variable} ${montserrat.variable}`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
