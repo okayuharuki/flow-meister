@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import FirstView from "./_components/FirstView";
 import PointSection from "./_components/PointSection";
 import CaseSection from "./_components/CaseSection";
+import FeatureSection from "./_components/FeatureSection";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <FirstView />
       <PointSection />
       <CaseSection />
+      <FeatureSection />
     </>
   );
 }
