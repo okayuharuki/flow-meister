@@ -5,6 +5,7 @@ import PointSection from "./_components/PointSection";
 import CaseSection from "./_components/CaseSection";
 import FeatureSection from "./_components/FeatureSection";
 import StorySection from "./_components/StorySection";
+import NewsSection from "./_components/NewsSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <CaseSection />
       <FeatureSection />
       <StorySection />
+      <NewsSection />
     </>
   );
 }
