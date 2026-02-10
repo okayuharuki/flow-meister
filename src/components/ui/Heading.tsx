@@ -1,6 +1,6 @@
 import styles from "./Heading.module.css";
 
-type HeadingProps = {
+export type HeadingProps = {
   subText: string;
   mainText: string;
   textAlign: "isLeft" | "isCenter" | "isRight";
