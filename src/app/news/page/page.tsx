@@ -1,3 +1,3 @@
 export default function News() {
-  return <p>お知らせ用の詳細用のページです。</p>;
+  return <p>お知らせページの１ページ目です。</p>;
 }
