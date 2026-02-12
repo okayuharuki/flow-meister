@@ -1,7 +1,7 @@
 import Button from "@/components/ui/Button";
 import styles from "./NewsSection.module.css";
 import Heading from "@/components/ui/Heading";
-import NewsCard from "./NewsCard";
+import NewsCard from "@/components/ui/NewsCard";
 
 export default function NewsSection() {
   return (
