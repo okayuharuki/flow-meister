@@ -1,7 +1,7 @@
 .input {
   padding: 6px 16px;
   background: var(--White);
-  border: 1px solid var(--Slate-300);
+  border: 2px solid var(--Slate-300);
   font-size: 16px;
 
   @media (width >=768px) {
@@ -12,5 +12,6 @@
   }
   &:focus {
     border-color: var(--Blue-500);
+    outline: none;
   }
 }
