@@ -3,6 +3,7 @@ import TwoColumn from "@/components/layout/TwoColumn";
 import Checkbox from "@/components/ui/Checkbox";
 import Input from "@/components/ui/Input";
 import Radio from "@/components/ui/Radio";
+import Submit from "@/components/ui/Submit";
 import Textarea from "@/components/ui/Textarea";
 
 export default function Contact() {
@@ -51,6 +52,8 @@ export default function Contact() {
           ]}
           required={true}
         />
+        <p>お問い合わせ用のページです。</p>
+        <Submit text="送信する" />
       </TwoColumn>
     </>
   );
