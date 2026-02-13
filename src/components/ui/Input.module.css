@@ -1,0 +1,16 @@
+.input {
+  padding: 6px 16px;
+  background: var(--White);
+  border: 1px solid var(--Slate-300);
+  font-size: 16px;
+
+  @media (width >=768px) {
+    font-size: 18px;
+  }
+  &::placeholder {
+    color: var(--Slate-400);
+  }
+  &:focus {
+    border-color: var(--Blue-500);
+  }
+}
