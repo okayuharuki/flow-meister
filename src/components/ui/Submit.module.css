@@ -1,0 +1,39 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 40px;
+  border: 2px solid var(--Blue-500);
+  border-radius: 48px;
+  background: var(--Blue-500);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: var(--White);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+
+  @media (width >= 768px) {
+    padding-inline: 80px;
+    font-size: 20px;
+  }
+}
+
+.icon {
+  width: 18px;
+  height: auto;
+}
+
+@media (any-hover: hover) {
+  .button:hover {
+    background-color: var(--white);
+    color: var(--Blue-500);
+  }
+
+  .button:hover .icon path {
+    fill: var(--Blue-500);
+  }
+}
