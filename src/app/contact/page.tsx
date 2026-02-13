@@ -1,6 +1,7 @@
 import PageFirstView from "@/components/layout/PageFirstView";
 import TwoColumn from "@/components/layout/TwoColumn";
 import Input from "@/components/ui/Input";
+import Textarea from "@/components/ui/Textarea";
 
 export default function Contact() {
   return (
@@ -19,6 +20,14 @@ export default function Contact() {
           defaultValue=""
           placeholder="例：株式会社XXX"
           required={true}
+          pattern="XXX"
+        />
+        <p>お問い合わせ用のページです。</p>
+        <Textarea
+          id="message"
+          name="message"
+          defaultValue=""
+          placeholder="お伝え事項がございましたらご自由にご記入ください。"
         />
       </TwoColumn>
     </>
