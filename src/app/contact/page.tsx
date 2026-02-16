@@ -2,6 +2,7 @@ import PageFirstView from "@/components/layout/PageFirstView";
 import TwoColumn from "@/components/layout/TwoColumn";
 import Checkbox from "@/components/ui/Checkbox";
 import Input from "@/components/ui/Input";
+import Label from "@/components/ui/Label";
 import Radio from "@/components/ui/Radio";
 import Submit from "@/components/ui/Submit";
 import Textarea from "@/components/ui/Textarea";
@@ -16,6 +17,7 @@ export default function Contact() {
       />
       <TwoColumn>
         <p>お問い合わせ用のページです。</p>
+        <Label text="会社名" isRequired={false} id="company" />
         <Input
           id="company"
           type="text"
