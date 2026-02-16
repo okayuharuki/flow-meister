@@ -1,3 +1,4 @@
+import Form from "@/components/layout/Form";
 import PageFirstView from "@/components/layout/PageFirstView";
 import TwoColumn from "@/components/layout/TwoColumn";
 import Checkbox from "@/components/ui/Checkbox";
@@ -16,6 +17,8 @@ export default function Contact() {
         textAlign="isCenter"
       />
       <TwoColumn>
+        <Form />
+
         <p>お問い合わせ用のページです。</p>
         <Label text="会社名" isRequired={false} id="company" />
         <Input
