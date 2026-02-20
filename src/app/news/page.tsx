@@ -3,25 +3,13 @@ import TwoColumn from "@/components/layout/TwoColumn";
 import styles from "./News.module.css";
 import Link from "next/link";
 import NewsCard from "@/components/ui/NewsCard";
-
-const WORDPRESS_POSTS_URL = process.env.WORDPRESS_POSTS_URL;
-
-function stripHtmlTags(html: string): string {
-  return html.replace(/<[^>]+>/g, "");
-}
-
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}.${month}.${day}`;
-}
+import { stripHtmlTags } from "@/utils/string";
+import { formatDate } from "@/utils/date";
+import { getPosts } from "@/lib/wordpress";
+import { FeaturedMedia, Term } from "@/types/wordpress";
 
 export default async function News() {
-  const response = await fetch(`${WORDPRESS_POSTS_URL}?_embed&per_page=9`);
-  const posts = await response.json();
-  console.log(posts);
+  const posts = await getPosts(9);
 
   return (
     <>
@@ -31,15 +19,20 @@ export default async function News() {
           <p className={styles.title}>すべての記事</p>
           <div className={styles.cards}>
             {posts.map((post) => {
+              const featuredmedia = (post?._embedded?.[
+                "wp:featuredmedia"
+              ]?.[0] ?? { source_url: "/thumbnail0.jpg" }) as FeaturedMedia;
+              const categories = (post?._embedded?.["wp:term"]?.[0] ??
+                []) as Term[];
               return (
                 <div className={styles.card} key={post.id}>
                   <NewsCard
-                    src={post._embedded["wp:featuredmedia"][0].source_url}
+                    src={featuredmedia.source_url}
                     id={post.id}
                     title={post.title.rendered}
                     excerpt={stripHtmlTags(post.excerpt.rendered)}
                     date={formatDate(post.date)}
-                    categories={post._embedded["wp:term"][0].map((category) => {
+                    categories={categories.map((category) => {
                       return { id: category.id, name: category.name };
                     })}
                   />
