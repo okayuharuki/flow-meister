@@ -1,8 +1,14 @@
 import styles from "./Sidebar.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { getTagPosts, getAllCategories } from "@/lib/wordpress";
+import { formatDate } from "@/utils/date";
+import { FeaturedMedia } from "@/types/wordpress";
 
-export default function Sidebar() {
+export default async function Sidebar() {
+  const tagPosts = await getTagPosts(7, 5);
+  const categories = await getAllCategories();
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.widget}>
@@ -44,114 +50,53 @@ export default function Sidebar() {
       <div className={styles.widget}>
         <h3 className={styles.widgetTitle}>ピックアップ記事</h3>
         <div className={styles.cards}>
-          <Link href="/news/post.html" className={styles.card}>
-            <Image
-              className={styles.cardImage}
-              src="/thumbnail1.jpg"
-              alt=""
-              width="110"
-              height="96"
-            />
-            <div className={styles.cardBody}>
-              <time className={styles.cardDate} dateTime="2025-03-27">
-                2025.03.27
-              </time>
-              <p className={styles.cardTitle}>
-                SaaS時代のデータサイエンティスト・佐藤が語る、Flow
-                Meisterが変える"業務共有"の可能性
-              </p>
-            </div>
-          </Link>
-          <Link href="/news/post.html" className={styles.card}>
-            <Image
-              className={styles.cardImage}
-              src="/thumbnail4.jpg"
-              alt=""
-              width="110"
-              height="96"
-            />
-            <div className={styles.cardBody}>
-              <time className={styles.cardDate} dateTime="2025-03-04">
-                2025.03.04
-              </time>
-              <p className={styles.cardTitle}>
-                属人化を脱却！業務ナレッジ共有で成果を上げた企業様の取り組みを公開しました
-              </p>
-            </div>
-          </Link>
-          <Link href="/news/post.html" className={styles.card}>
-            <Image
-              className={styles.cardImage}
-              src="/thumbnail6.jpg"
-              alt=""
-              width="110"
-              height="96"
-            />
-            <div className={styles.cardBody}>
-              <time className={styles.cardDate} dateTime="2025-02-20">
-                2025.02.20
-              </time>
-              <p className={styles.cardTitle}>
-                部署間連携で受注率がアップ！営業・サポート間の情報共有成功事例を追加しました
-              </p>
-            </div>
-          </Link>
-          <Link href="/news/post.html" className={styles.card}>
-            <Image
-              className={styles.cardImage}
-              src="/thumbnail7.jpg"
-              alt=""
-              width="110"
-              height="96"
-            />
-            <div className={styles.cardBody}>
-              <time className={styles.cardDate} dateTime="2025-02-15">
-                2025.02.15
-              </time>
-              <p className={styles.cardTitle}>
-                社内ドキュメント整備の成功ポイントとは？見せ方を変えた企業様の声を掲載中
-              </p>
-            </div>
-          </Link>
-          <Link href="/news/post.html" className={styles.card}>
-            <Image
-              className={styles.cardImage}
-              src="/thumbnail9.jpg"
-              alt=""
-              width="110"
-              height="96"
-            />
-            <div className={styles.cardBody}>
-              <time className={styles.cardDate} dateTime="2025-02-08">
-                2025.02.08
-              </time>
-              <p className={styles.cardTitle}>
-                引き継ぎ業務がスムーズに！"属人化リスク"を抑える取り組み事例を公開
-              </p>
-            </div>
-          </Link>
+          {tagPosts.map((tagPost) => {
+            const featuredmedia = (tagPost?._embedded?.[
+              "wp:featuredmedia"
+            ]?.[0] ?? { source_url: "/thumbnail0.jpg" }) as FeaturedMedia;
+
+            return (
+              <Link
+                href={`/news/${tagPost.id}/`}
+                className={styles.card}
+                key={tagPost.id}
+              >
+                <Image
+                  className={styles.cardImage}
+                  src={featuredmedia.source_url}
+                  alt=""
+                  width="110"
+                  height="96"
+                />
+                <div className={styles.cardBody}>
+                  <time
+                    className={styles.cardDate}
+                    dateTime={formatDate(tagPost.date, "-")}
+                  >
+                    {formatDate(tagPost.date)}
+                  </time>
+                  <p className={styles.cardTitle}>{tagPost.title.rendered}</p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
       <div className={styles.widget}>
         <h3 className={styles.widgetTitle}>メニュー</h3>
         <ul className={styles.lists}>
-          <li className={styles.list}>
-            <Link className={styles.link} href="/news/">
-              コラム
-            </Link>
-            <Link className={styles.link} href="/news/">
-              人材育成
-            </Link>
-            <Link className={styles.link} href="/news/">
-              営業支援
-            </Link>
-            <Link className={styles.link} href="/news/">
-              導入事例
-            </Link>
-            <Link className={styles.link} href="/news/">
-              業務改善
-            </Link>
-          </li>
+          {categories.map((category) => {
+            return (
+              <li className={styles.list} key={category.id}>
+                <Link
+                  className={styles.link}
+                  href={`/news/category/${category.id}`}
+                >
+                  {category.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
