@@ -8,6 +8,7 @@ import styles from "./Post.module.css";
 import { getPost } from "@/lib/wordpress";
 import { formatDate } from "@/utils/date";
 import { FeaturedMedia, Term } from "@/types/wordpress";
+import Breadcrumb from "@/components/layout/Breadcrumb";
 
 export default async function News({ params }) {
   const { id } = await params;
@@ -18,6 +19,21 @@ export default async function News({ params }) {
   const featuredmedia = (post?._embedded?.["wp:featuredmedia"]?.[0] ?? {
     source_url: "/thumbnail0.jpg",
   }) as FeaturedMedia;
+
+  const breadcrumbItems = [
+    {
+      href: "/",
+      text: "ホーム",
+    },
+    {
+      href: "/news",
+      text: "お知らせ",
+    },
+    {
+      href: `/news/${id}/`,
+      text: post.title.rendered,
+    },
+  ];
 
   return (
     <>
@@ -62,6 +78,7 @@ export default async function News({ params }) {
           </div>
         </div>
       </TwoColumn>
+      <Breadcrumb items={breadcrumbItems} />
     </>
   );
 }

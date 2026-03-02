@@ -3,8 +3,20 @@ import OneColumn from "@/components/layout/OneColumn";
 import Image from "next/image";
 import ButtonOutline from "@/components/ui/ButtonOutline";
 import styles from "./Thanks.module.css";
+import Breadcrumb from "@/components/layout/Breadcrumb";
 
 export default function Thanks() {
+  const breadcrumbItems = [
+    {
+      href: "/",
+      text: "ホーム",
+    },
+    {
+      href: "/contact",
+      text: "お問い合わせ",
+    },
+  ];
+
   return (
     <>
       <PageFirstView
@@ -34,6 +46,7 @@ export default function Thanks() {
           </div>
         </div>
       </OneColumn>
+      <Breadcrumb items={breadcrumbItems} />
     </>
   );
 }

@@ -7,6 +7,7 @@ import { stripHtmlTags } from "@/utils/string";
 import { formatDate } from "@/utils/date";
 import { getPosts, getTotalPages } from "@/lib/wordpress";
 import { FeaturedMedia, Term } from "@/types/wordpress";
+import Breadcrumb from "@/components/layout/Breadcrumb";
 
 type NewsProps = {
   params: Promise<{ page: string }>;
@@ -18,6 +19,17 @@ export default async function News({ params }: NewsProps) {
   const currentPage = parseInt(page);
   const posts = await getPosts(perPage, currentPage);
   const totalPages = await getTotalPages(perPage);
+
+  const breadcrumbItems = [
+    {
+      href: "/",
+      text: "ホーム",
+    },
+    {
+      href: "/news",
+      text: "お知らせ",
+    },
+  ];
 
   return (
     <>
@@ -66,6 +78,7 @@ export default async function News({ params }: NewsProps) {
           </div>
         </div>
       </TwoColumn>
+      <Breadcrumb items={breadcrumbItems} />
     </>
   );
 }
