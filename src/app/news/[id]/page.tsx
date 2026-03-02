@@ -1,3 +1,5 @@
+// export const dynamic = "force-static";
+
 import PageFirstView from "@/components/layout/PageFirstView";
 import TwoColumn from "@/components/layout/TwoColumn";
 import Link from "next/link";
@@ -39,7 +41,7 @@ export default async function News({ params }) {
               })}
             </div>
           </div>
-          <img
+          <Image
             className={styles.thumbnail}
             src={featuredmedia.source_url}
             alt=""
