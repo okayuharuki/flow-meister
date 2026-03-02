@@ -8,9 +8,12 @@ import {
 const WORDPRESS_POSTS_URL = process.env.WORDPRESS_POSTS_URL;
 const WORDPRESS_CATEGORIES_URL = process.env.WORDPRESS_CATEGORIES_URL;
 
-export async function getPosts(perPage: number): Promise<WP_REST_API_Posts> {
+export async function getPosts(
+  perPage: number,
+  page: number = 1,
+): Promise<WP_REST_API_Posts> {
   const response = await fetch(
-    `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}`,
+    `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}&page=${page}`,
   );
   const posts = await response.json();
 
@@ -50,13 +53,14 @@ export async function getAllCategories(): Promise<WP_REST_API_Categories> {
 export async function getCategoryPosts(
   categoryIds: number | number[],
   perPage: number,
+  page: number = 1,
 ): Promise<WP_REST_API_Posts> {
   const categoriesString = Array.isArray(categoryIds)
     ? categoryIds.join(",")
     : categoryIds.toString();
 
   const response = await fetch(
-    `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}&categories=${categoriesString}`,
+    `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}&categories=${categoriesString}&page=${page}`,
   );
   const posts = await response.json();
 
@@ -70,4 +74,29 @@ export async function getCategoryFromId(
   const category = await response.json();
 
   return category;
+}
+
+export async function getTotalPages(perPage: number): Promise<number> {
+  const response = await fetch(
+    `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}`,
+  );
+  const totalPages = parseInt(response.headers.get("X-WP-TotalPages")) || 0;
+
+  return totalPages;
+}
+
+export async function getCategoryTotalPages(
+  categoryIds: number | number[],
+  perPage: number,
+): Promise<number> {
+  const categoriesString = Array.isArray(categoryIds)
+    ? categoryIds.join(",")
+    : categoryIds.toString();
+
+  const response = await fetch(
+    `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}&categories=${categoriesString}`,
+  );
+  const totalPages = parseInt(response.headers.get("X-WP-TotalPages")) || 0;
+
+  return totalPages;
 }
