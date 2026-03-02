@@ -9,12 +9,24 @@ import { stripHtmlTags } from "@/utils/string";
 import { formatDate } from "@/utils/date";
 import { getPosts, getTotalPages } from "@/lib/wordpress";
 import { FeaturedMedia, Term } from "@/types/wordpress";
+import Breadcrumb from "@/components/layout/Breadcrumb";
 
 export default async function News() {
   const perPage = 9;
   const currentPage = 1;
   const posts = await getPosts(perPage);
   const totalPages = await getTotalPages(perPage);
+
+  const breadcrumbItems = [
+    {
+      href: "/",
+      text: "ホーム",
+    },
+    {
+      href: "/news",
+      text: "お知らせ",
+    },
+  ];
 
   return (
     <>
@@ -63,6 +75,7 @@ export default async function News() {
           </div>
         </div>
       </TwoColumn>
+      <Breadcrumb items={breadcrumbItems} />
     </>
   );
 }
