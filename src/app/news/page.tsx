@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import PageFirstView from "@/components/layout/PageFirstView";
 import TwoColumn from "@/components/layout/TwoColumn";
 import styles from "./News.module.css";

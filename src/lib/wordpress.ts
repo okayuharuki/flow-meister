@@ -21,7 +21,9 @@ export async function getPosts(
 }
 
 export async function getPost(id: number): Promise<WP_REST_API_Post> {
-  const response = await fetch(`${WORDPRESS_POSTS_URL}/${id}?_embed`);
+  const response = await fetch(`${WORDPRESS_POSTS_URL}/${id}?_embed`, {
+    // next: { revalidate: 60 },
+  });
   const post = await response.json();
 
   return post;
