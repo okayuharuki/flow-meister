@@ -5,7 +5,11 @@ import Link from "next/link";
 import NewsCard from "@/components/ui/NewsCard";
 import { stripHtmlTags } from "@/utils/string";
 import { formatDate } from "@/utils/date";
-import { getCategoryPosts, getCategoryFromId } from "@/lib/wordpress";
+import {
+  getCategoryPosts,
+  getCategoryFromId,
+  getCategoryTotalPages,
+} from "@/lib/wordpress";
 import { FeaturedMedia, Term } from "@/types/wordpress";
 
 type NewsProps = {
@@ -15,8 +19,11 @@ type NewsProps = {
 export default async function News({ params }: NewsProps) {
   const { id } = await params;
   const currentCategoryId = parseInt(id);
-  const posts = await getCategoryPosts(currentCategoryId, 9);
+  const perPage = 9;
+  const currentPage = 1;
+  const posts = await getCategoryPosts(currentCategoryId, perPage);
   const category = await getCategoryFromId(currentCategoryId);
+  const totalPages = await getCategoryTotalPages(currentCategoryId, perPage);
 
   return (
     <>
@@ -49,12 +56,18 @@ export default async function News({ params }: NewsProps) {
           </div>
           <div className={styles.pagination}>
             <div className={styles.numbers}>
-              <Link className={`${styles.number} ${styles.isCurrent}`} href="">
-                1
-              </Link>
-              <Link className={styles.number} href="">
-                2
-              </Link>
+              {[...Array(totalPages)].map((_, i) => {
+                const pageNumber = i + 1;
+                return (
+                  <Link
+                    key={pageNumber}
+                    className={`${styles.number} ${currentPage === pageNumber && styles.isCurrent}`}
+                    href={`/news/category/${currentCategoryId}/page/${pageNumber}/`}
+                  >
+                    {pageNumber}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
