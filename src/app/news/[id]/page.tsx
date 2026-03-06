@@ -7,10 +7,40 @@ import Image from "next/image";
 import styles from "./Post.module.css";
 import { getPost } from "@/lib/wordpress";
 import { formatDate } from "@/utils/date";
+import { stripHtmlTags } from "@/utils/string";
 import { FeaturedMedia, Term } from "@/types/wordpress";
 import Breadcrumb from "@/components/layout/Breadcrumb";
+import type { Metadata } from "next";
+import { defaultOpenGraph, siteName } from "@/lib/metadata";
 
-export default async function News({ params }) {
+type NewsProps = {
+  params: Promise<{ id: string }>;
+};
+
+export async function generateMetadata({
+  params,
+}: NewsProps): Promise<Metadata> {
+  const { id } = await params;
+
+  const post = await getPost(parseInt(id));
+  const featuredmedia = (post?._embedded?.["wp:featuredmedia"]?.[0] ?? {
+    source_url: "/thumbnail0.jpg",
+  }) as FeaturedMedia;
+
+  return {
+    title: post.title.rendered,
+    description: stripHtmlTags(post.excerpt.rendered),
+    openGraph: {
+      ...defaultOpenGraph,
+      title: `${post.title.rendered} | ${siteName}`,
+      url: `/news/${id}/`,
+      images: [featuredmedia.source_url],
+      type: "article",
+    },
+  };
+}
+
+export default async function News({ params }: NewsProps) {
   const { id } = await params;
 
   const post = await getPost(parseInt(id));

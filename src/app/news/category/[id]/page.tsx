@@ -12,10 +12,31 @@ import {
 } from "@/lib/wordpress";
 import { FeaturedMedia, Term } from "@/types/wordpress";
 import Breadcrumb from "@/components/layout/Breadcrumb";
+import { defaultOpenGraph, siteName } from "@/lib/metadata";
+import type { Metadata } from "next";
 
 type NewsProps = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({
+  params,
+}: NewsProps): Promise<Metadata> {
+  const { id } = await params;
+
+  const currentCategoryId = parseInt(id);
+  const category = await getCategoryFromId(currentCategoryId);
+
+  return {
+    title: `「${category.name}」の記事`,
+    description: `「${category.name}」の記事一覧ページです。`,
+    openGraph: {
+      ...defaultOpenGraph,
+      title: `「${category.name}」の記事 | ${siteName}`,
+      url: `/news/category/${id}/`,
+    },
+  };
+}
 
 export default async function News({ params }: NewsProps) {
   const { id } = await params;
