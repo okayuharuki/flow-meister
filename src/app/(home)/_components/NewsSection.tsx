@@ -14,31 +14,36 @@ export default async function NewsSection() {
     <div className={styles.news}>
       <div className={styles.container}>
         <Heading subText="News" mainText="お知らせ" textAlign="isCenter" />
-        <div className={styles.cards}>
-          {posts.map((post) => {
-            const featuredmedia = (post?._embedded?.[
-              "wp:featuredmedia"
-            ]?.[0] ?? { source_url: "/thumbnail0.jpg" }) as FeaturedMedia;
-            const categories = (post?._embedded?.["wp:term"]?.[0] ??
-              []) as Term[];
-            return (
-              <div className={styles.card} key={post.id}>
-                <NewsCard
-                  src={featuredmedia.source_url}
-                  id={post.id}
-                  title={post.title.rendered}
-                  excerpt={stripHtmlTags(post.excerpt.rendered)}
-                  date={formatDate(post.date)}
-                  categories={categories.map((category) => {
-                    return { id: category.id, name: category.name };
-                  })}
-                />
-              </div>
-            );
-          })}
+        {posts.length === 0 ? (
+          <p className={styles.textNotFound}>記事が存在しません</p>
+        ) : (
+          <div className={styles.cards}>
+            {posts.map((post) => {
+              const featuredmedia = (post?._embedded?.[
+                "wp:featuredmedia"
+              ]?.[0] ?? { source_url: "/thumbnail0.jpg" }) as FeaturedMedia;
+              const categories = (post?._embedded?.["wp:term"]?.[0] ??
+                []) as Term[];
+              return (
+                <div className={styles.card} key={post.id}>
+                  <NewsCard
+                    src={featuredmedia.source_url}
+                    id={post.id}
+                    title={post.title.rendered}
+                    excerpt={stripHtmlTags(post.excerpt.rendered)}
+                    date={formatDate(post.date)}
+                    categories={categories.map((category) => {
+                      return { id: category.id, name: category.name };
+                    })}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
+        <div className={styles.button}>
+          <Button href="/news/" text="すべてのお知らせを見る" />
         </div>
-
-        <Button href="/news/" text="すべてのお知らせを見る" />
       </div>
     </div>
   );
