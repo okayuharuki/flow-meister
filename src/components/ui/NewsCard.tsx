@@ -4,12 +4,12 @@ import Link from "next/link";
 
 type NewsCardProps = {
   src: string;
-  id: number;
+  id: string | number;
   title: string;
   excerpt: string;
   date: string;
   categories: {
-    id: number;
+    id: string | number;
     name: string;
   }[];
 };
