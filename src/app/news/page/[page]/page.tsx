@@ -10,6 +10,7 @@ import { FeaturedMedia, Term } from "@/types/wordpress";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import { defaultOpenGraph, siteName } from "@/lib/metadata";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type NewsProps = {
   params: Promise<{ page: string }>;
@@ -37,6 +38,10 @@ export default async function News({ params }: NewsProps) {
   const currentPage = parseInt(page);
   const posts = await getPosts(perPage, currentPage);
   const totalPages = await getTotalPages(perPage);
+
+  if(posts.length === 0) {
+    notFound();
+  }
 
   const breadcrumbItems = [
     {

@@ -15,15 +15,29 @@ export async function getPosts(
   const response = await fetch(
     `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}&page=${page}`,
   );
+
+  if (response.status === 400 || response.status === 404) {
+    return [];
+  }
+
   const posts = await response.json();
+
+  if (!Array.isArray(posts)) {
+    return [];
+  }
 
   return posts;
 }
 
-export async function getPost(id: number): Promise<WP_REST_API_Post> {
+export async function getPost(id: number): Promise<WP_REST_API_Post|null> {
   const response = await fetch(`${WORDPRESS_POSTS_URL}/${id}?_embed`, {
     // next: { revalidate: 60 },
   });
+
+  if (response.status === 400 || response.status === 404) {
+    return null;
+  }
+
   const post = await response.json();
 
   return post;
@@ -40,7 +54,16 @@ export async function getTagPosts(
   const response = await fetch(
     `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}&tags=${tagsString}`,
   );
+
+  if (response.status === 400 || response.status === 404) {
+    return [];
+  }
+
   const posts = await response.json();
+
+  if (!Array.isArray(posts)) {
+    return [];
+  }
 
   return posts;
 }
@@ -64,7 +87,16 @@ export async function getCategoryPosts(
   const response = await fetch(
     `${WORDPRESS_POSTS_URL}?_embed&per_page=${perPage}&categories=${categoriesString}&page=${page}`,
   );
+
+  if (response.status === 400 || response.status === 404) {
+    return [];
+  }
+
   const posts = await response.json();
+
+  if (!Array.isArray(posts)) {
+    return [];
+  }
 
   return posts;
 }
