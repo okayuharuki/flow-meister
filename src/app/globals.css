@@ -1,67 +1,71 @@
-:root {
-  /* color definition */
-  /* スラッシュ(/)ではなくハイフン(-)を使います */
-  --Slate-300: #cbd5e1;
-  --Slate-400: #94a3b8;
-  --Slate-700: #334155;
-  --Sky-50: #f0f9ff;
-  --Sky-100: #e0f2fe;
-  --Sky-200: #bae6fd;
-  --Sky-400: #38bdf8;
-  --Blue-500: #3b82f6;
-  --Gray-200: #e5e7eb;
-  --White: #ffffff;
-}
+@import "tailwindcss";
 
-/* --- 初期化 & リセット --- */
+@layer base {
+  :root {
+    /* color definition */
+    /* スラッシュ(/)ではなくハイフン(-)を使います */
+    --Slate-300: #cbd5e1;
+    --Slate-400: #94a3b8;
+    --Slate-700: #334155;
+    --Sky-50: #f0f9ff;
+    --Sky-100: #e0f2fe;
+    --Sky-200: #bae6fd;
+    --Sky-400: #38bdf8;
+    --Blue-500: #3b82f6;
+    --Gray-200: #e5e7eb;
+    --White: #ffffff;
+  }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  /* --- 初期化 & リセット --- */
 
-body {
-  margin: 0;
-  padding: 0;
-  /* 呼び出し側もハイフンに合わせます */
-  background: var(--Sky-50);
-  font-family: var(--font-m-plus-1p), sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.8;
-  color: var(--Slate-700);
-}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    /* 呼び出し側もハイフンに合わせます */
+    background: var(--Sky-50);
+    font-family: var(--font-m-plus-1p), sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.8;
+    color: var(--Slate-700);
+  }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
-}
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
-ul,
-ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
 
-input,
-textarea,
-button {
-  font: inherit;
+  ul,
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  input,
+  textarea,
+  button {
+    font: inherit;
+  }
 }
