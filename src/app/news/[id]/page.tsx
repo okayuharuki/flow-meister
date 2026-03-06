@@ -14,7 +14,7 @@ import type { Metadata } from "next";
 import { defaultOpenGraph, siteName } from "@/lib/metadata";
 
 type NewsProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({
