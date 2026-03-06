@@ -8,10 +8,28 @@ import { formatDate } from "@/utils/date";
 import { getPosts, getTotalPages } from "@/lib/wordpress";
 import { FeaturedMedia, Term } from "@/types/wordpress";
 import Breadcrumb from "@/components/layout/Breadcrumb";
+import { defaultOpenGraph, siteName } from "@/lib/metadata";
+import type { Metadata } from "next";
 
 type NewsProps = {
   params: Promise<{ page: string }>;
 };
+
+export async function generateMetadata({
+  params,
+}: NewsProps): Promise<Metadata> {
+  const { page } = await params;
+
+  return {
+    title: "お知らせ",
+    description: "お知らせページ一覧ページです。",
+    openGraph: {
+      ...defaultOpenGraph,
+      title: `お知らせ|${siteName}`,
+      url: `/news/page/${page}/`,
+    },
+  };
+}
 
 export default async function News({ params }: NewsProps) {
   const { page } = await params;

@@ -10,6 +10,18 @@ import { formatDate } from "@/utils/date";
 import { getPosts, getTotalPages } from "@/lib/wordpress";
 import { FeaturedMedia, Term } from "@/types/wordpress";
 import Breadcrumb from "@/components/layout/Breadcrumb";
+import type { Metadata } from "next";
+import { defaultOpenGraph, siteName } from "@/lib/metadata";
+
+export const metadata: Metadata = {
+  title: "お知らせ",
+  description: "お知らせページ一覧ページです。",
+  openGraph: {
+    ...defaultOpenGraph,
+    title: `お知らせ|${siteName}`,
+    url: "/news/",
+  },
+};
 
 export default async function News() {
   const perPage = 9;
