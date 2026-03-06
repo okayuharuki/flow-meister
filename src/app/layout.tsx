@@ -5,6 +5,8 @@ import Footer from "@/components/layout/Footer";
 import CtaSection from "@/components/layout/CtaSection";
 import { Metadata } from "next";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
+
 const mplus1p = M_PLUS_1p({
   weight: ["400", "500", "700", "800"],
   variable: "--font-m-plus-1p",
@@ -18,7 +20,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("http://localhost:3000/"),
+  metadataBase: new URL(SITE_URL),
   title: {
     template: "%s | Flow Meister",
     default: "Flow Meister",
