@@ -4,7 +4,10 @@ const nextConfig = {
   reactCompiler: true,
   trailingSlash: true,
   images: {
-    remotePatterns: [new URL("https://okayuharuki.shop/**")],
+    remotePatterns: [
+      new URL("https://okayuharuki.shop/**"),
+      new URL("https://images.microcms-assets.io/**"),
+    ],
   },
 };
 
