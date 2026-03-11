@@ -62,5 +62,3 @@ npm run dev
 MICROCMS_API_KEY=xxxx
 MICROCMS_ENDPOINT=xxxx
 WORDPRESS_API_URL=xxxx
-
----
