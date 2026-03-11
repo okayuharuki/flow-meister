@@ -5,6 +5,11 @@ microCMS や WordPress から記事データを取得し、動的に表示しま
 
 ---
 
+## 🌐 デモ
+https://flow-meister-jet-seven.vercel.app/
+
+---
+
 ## 📌 概要
 
 flow-meister は以下の機能を備えた記事管理・表示アプリケーションです。
@@ -59,6 +64,3 @@ MICROCMS_ENDPOINT=xxxx
 WORDPRESS_API_URL=xxxx
 
 ---
-
-## 🌐 デモ
-https://flow-meister-jet-seven.vercel.app/
