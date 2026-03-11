@@ -36,8 +36,6 @@ types/      # 型定義
 utils/      # ユーティリティ関数
 public/     # 静的ファイル
 
-コード
-
 ---
 
 ## 🚀 セットアップ
@@ -60,5 +58,5 @@ MICROCMS_API_KEY=xxxx
 MICROCMS_ENDPOINT=xxxx
 WORDPRESS_API_URL=xxxx
 
-🌐 デモ
+#🌐 デモ
 https://flow-meister-jet-seven.vercel.app/
